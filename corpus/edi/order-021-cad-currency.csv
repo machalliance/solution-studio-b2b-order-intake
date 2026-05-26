@@ -1,0 +1,2 @@
+po_number,order_date,account_id,buyer_company,buyer_email,currency,line_number,buyer_sku,description,quantity,unit_of_measure,unit_price
+PO-2026-2102,2026-05-21,PELC-001,Pellucid Wholesale Ltd,purchasing@pellucidwholesale.example,CAD,1,WDGT-BLUE-L,Apex Widget Blue Large,15,EA,16.00

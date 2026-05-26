@@ -1,0 +1,23 @@
+From: procurement@ironfeldindustrial.example
+To: orders@b2b-intake.local
+Subject: Order Request
+Date: Mon, 19 May 2026 09:45:00 +0000
+Message-ID: <email-04@ironfeldindustrial.example>
+Content-Type: text/plain; charset=utf-8
+
+Hi,
+
+Please process attached order details below.
+
+PO: IFO-0055
+Date: 2026-05-19 (also see attached document dated 2026-04-01)
+Account: IRNF-003
+
+Line 1: GSKT-A1-STD x 10 @ $8.00
+Line 1: GSKT-A1-STD x 25 @ $7.50
+(please use whichever price applies)
+
+Delivery: ASAP / by end of Q2 / 2026-06-30 (see terms)
+
+Thanks
+Ironfeld Procurement

@@ -1,0 +1,20 @@
+From: orders@torchlinesupplies.example
+To: orders@b2b-intake.local
+Subject: PO attached
+Date: Mon, 19 May 2026 10:15:00 +0000
+Message-ID: <email-06@torchlinesupplies.example>
+Content-Type: multipart/mixed; boundary="boundary-06"
+
+--boundary-06
+Content-Type: text/plain
+
+Please see attached.
+
+--boundary-06
+Content-Type: application/pdf
+Content-Disposition: attachment; filename="po-002.pdf"
+Content-Transfer-Encoding: base64
+
+JVBERi0xLjQKJcOkw7zDtsO8CjIgMCBvYmoKPDwvTGVuZ3RoIDMgMCBSPj4Kc3RyZWFtCg==
+
+--boundary-06--

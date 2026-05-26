@@ -1,0 +1,465 @@
+{
+  "tests": [
+
+    // ── RELEASE CORPUS (01-18) ────────────────────────────────────────────────
+
+    {
+      "id": "email-01",
+      "label": "Complete PO – Pellucid",
+      "description": "Well-formed email PO from known buyer, all SKUs resolvable.",
+      "channel": "email",
+      "file": "corpus/emails/email-01-complete.eml",
+      "expected_outcome": "submit",
+      "tags": ["happy-path"]
+    },
+    {
+      "id": "email-02",
+      "label": "Missing Quantity – Pellucid",
+      "description": "PO email with line items missing quantity fields.",
+      "channel": "email",
+      "file": "corpus/emails/email-02-missing-qty.eml",
+      "expected_outcome": "clarify",
+      "tags": ["incomplete", "clarify"]
+    },
+    {
+      "id": "email-03",
+      "label": "Spam / Non-PO",
+      "description": "Marketing newsletter — should be rejected as non-order.",
+      "channel": "email",
+      "file": "corpus/emails/email-03-spam.eml",
+      "expected_outcome": "reject",
+      "tags": ["negative", "reject"]
+    },
+    {
+      "id": "email-04",
+      "label": "Ambiguous Order – Ironfeld",
+      "description": "Vague subject and body; confidence expected to be low.",
+      "channel": "email",
+      "file": "corpus/emails/email-04-ambiguous.eml",
+      "expected_outcome": "review",
+      "tags": ["ambiguous"]
+    },
+    {
+      "id": "email-05",
+      "label": "PDF Attachment – Clean",
+      "description": "Email with a clean, machine-readable PDF purchase order.",
+      "channel": "email",
+      "file": "corpus/emails/email-05-pdf-clean.eml",
+      "expected_outcome": "submit",
+      "tags": ["pdf", "happy-path"]
+    },
+    {
+      "id": "email-06",
+      "label": "PDF Attachment – Degraded",
+      "description": "Email with a scanned/degraded PDF; extraction confidence may be low.",
+      "channel": "email",
+      "file": "corpus/emails/email-06-pdf-degraded.eml",
+      "expected_outcome": "review",
+      "tags": ["pdf", "degraded"]
+    },
+    {
+      "id": "email-07",
+      "label": "PDF Attachment – Unknown Buyer",
+      "description": "Email with PDF from an unrecognised sender domain — customer unresolved after full cascade. Routed to Human Review so operator can identify the account.",
+      "channel": "email",
+      "file": "corpus/emails/email-07-pdf-bogus.eml",
+      "expected_outcome": "review",
+      "tags": ["pdf", "unknown-buyer", "review"]
+    },
+    {
+      "id": "email-08",
+      "label": "Cascade – Email Domain Match",
+      "description": "No account ID provided; sender email domain matches PELC-001 at cascade step 2.",
+      "channel": "email",
+      "file": "corpus/emails/email-08-cascade-email.eml",
+      "expected_outcome": "submit",
+      "tags": ["cascade", "happy-path"]
+    },
+    {
+      "id": "email-09",
+      "label": "Cascade – Fuzzy Buyer",
+      "description": "No account ID, email, or phone match; company name partially matches at cascade step 4 — goes to Human Review with customer candidates.",
+      "channel": "email",
+      "file": "corpus/emails/email-09-cascade-fuzzy.eml",
+      "expected_outcome": "review",
+      "tags": ["cascade", "fuzzy", "unknown-buyer"]
+    },
+    {
+      "id": "edi-01",
+      "label": "CSV – Valid Order",
+      "description": "Clean CSV PO from Pellucid; all SKUs resolve exactly.",
+      "channel": "edi",
+      "file": "corpus/edi/order-001-valid.csv",
+      "expected_outcome": "submit",
+      "tags": ["csv", "happy-path"]
+    },
+    {
+      "id": "edi-02",
+      "label": "CSV – Unknown SKU",
+      "description": "CSV PO containing buyer SKUs with no exact match — AI finds partial candidates between thresholds, so operator must select the correct SKU. Routes to Human Review with candidate list.",
+      "channel": "edi",
+      "file": "corpus/edi/order-002-sku-unknown.csv",
+      "expected_outcome": "review",
+      "tags": ["csv", "sku-resolution", "review"]
+    },
+    {
+      "id": "edi-03",
+      "label": "XLSX – Backorder",
+      "description": "Spreadsheet PO where one item is on backorder — auto-submits with backorder_eta in ERP payload.",
+      "channel": "edi",
+      "file": "corpus/edi/order-003-backorder.xlsx",
+      "expected_outcome": "submit",
+      "tags": ["xlsx", "backorder"]
+    },
+    {
+      "id": "edi-04",
+      "label": "XLSX – No Stock",
+      "description": "Spreadsheet PO for items with zero available inventory and not backorderable.",
+      "channel": "edi",
+      "file": "corpus/edi/order-004-no-stock.xlsx",
+      "expected_outcome": "review",
+      "tags": ["xlsx", "no-stock"]
+    },
+    {
+      "id": "edi-05",
+      "label": "X12 850 – Valid",
+      "description": "Well-formed ANSI X12 850 from known trading partner.",
+      "channel": "edi",
+      "file": "corpus/edi/order-005-850-valid.edi",
+      "expected_outcome": "submit",
+      "tags": ["x12", "happy-path"]
+    },
+    {
+      "id": "edi-06",
+      "label": "X12 850 – Missing Line Item Field",
+      "description": "X12 850 with a PO1 segment missing unit of measure — clarification reply sent.",
+      "channel": "edi",
+      "file": "corpus/edi/order-006-850-missing-item.edi",
+      "expected_outcome": "clarify",
+      "tags": ["x12", "incomplete", "clarify"]
+    },
+    {
+      "id": "edi-07",
+      "label": "X12 850 – Unknown Buyer",
+      "description": "X12 850 from an ISA sender ID not in the customer list — customer unresolved after full cascade. Routed to Human Review so operator can identify the account.",
+      "channel": "edi",
+      "file": "corpus/edi/order-007-850-unknown-buyer.edi",
+      "expected_outcome": "review",
+      "tags": ["x12", "unknown-buyer", "review"]
+    },
+    {
+      "id": "edi-08",
+      "label": "CSV – Backorder Mix",
+      "description": "CSV PO with a mix of in-stock and backordered items — auto-submits with backorder flag.",
+      "channel": "edi",
+      "file": "corpus/edi/order-008-backorder.csv",
+      "expected_outcome": "submit",
+      "tags": ["csv", "backorder"]
+    },
+    {
+      "id": "edi-09",
+      "label": "XLSX – Unknown Buyer",
+      "description": "Spreadsheet PO from a company not in the customer registry — customer unresolved after full cascade. Routed to Human Review so operator can identify the account.",
+      "channel": "edi",
+      "file": "corpus/edi/order-009-unknown-buyer.xlsx",
+      "expected_outcome": "review",
+      "tags": ["xlsx", "unknown-buyer", "review"]
+    },
+
+    // ── EXTENDED CORPUS (19-43) ───────────────────────────────────────────────
+
+    // -- SKU Resolution boundary tests --
+    {
+      "id": "edi-10",
+      "label": "CSV – SKU Mid-Confidence (Auto-Resolve)",
+      "description": "Buyer SKU is a plausible abbreviation of a catalogue SKU; AI confidence expected at or above SKU_AUTO_THRESHOLD. Tests auto-resolve path with reasoning logged.",
+      "channel": "edi",
+      "file": "corpus/edi/order-010-sku-mid-auto.csv",
+      "expected_outcome": "submit",
+      "tags": ["csv", "sku-resolution", "fuzzy", "auto-resolve"]
+    },
+    {
+      "id": "edi-11",
+      "label": "CSV – SKU Mid-Confidence (Review)",
+      "description": "Buyer SKU is ambiguous; AI returns multiple candidates between SKU_REVIEW_THRESHOLD and SKU_AUTO_THRESHOLD. Tests Human Review with candidate list.",
+      "channel": "edi",
+      "file": "corpus/edi/order-011-sku-mid-review.csv",
+      "expected_outcome": "review",
+      "tags": ["csv", "sku-resolution", "fuzzy"]
+    },
+
+    // -- Customer cascade step tests --
+    {
+      "id": "email-10",
+      "label": "Cascade – Phone Match (Step 3)",
+      "description": "No account ID or email domain match; buyer phone number matches TRCL-002 after E.164 normalisation at cascade step 3.",
+      "channel": "email",
+      "file": "corpus/emails/email-10-cascade-phone.eml",
+      "expected_outcome": "submit",
+      "tags": ["cascade", "phone-match"]
+    },
+    {
+      "id": "email-11",
+      "label": "Cascade – Explicit Account ID (Step 1)",
+      "description": "Buyer provides account ID explicitly; resolved immediately at cascade step 1 with no further lookup needed.",
+      "channel": "email",
+      "file": "corpus/emails/email-11-cascade-account-id.eml",
+      "expected_outcome": "submit",
+      "tags": ["cascade", "account-id"]
+    },
+
+    // -- Duplicate PO detection --
+    {
+      "id": "edi-12",
+      "label": "CSV – Duplicate PO Number",
+      "description": "PO number and customer account ID identical to a previously processed order within DUPLICATE_PO_WINDOW_DAYS. Must be rejected as duplicate.",
+      "channel": "edi",
+      "file": "corpus/edi/order-012-duplicate-po.csv",
+      "expected_outcome": "reject",
+      "notes": "Run this test after edi-01 has been processed successfully. Uses same PO number PO-2026-0301.",
+      "tags": ["csv", "duplicate", "reject"]
+    },
+
+    // -- Multi-line item complexity --
+    {
+      "id": "edi-13",
+      "label": "CSV – Mixed Line Resolution",
+      "description": "Order with 4 line items: 2 exact SKU matches, 1 fuzzy match above auto-threshold, 1 unknown SKU. Tests mixed resolution state routing to Human Review.",
+      "channel": "edi",
+      "file": "corpus/edi/order-013-mixed-lines.csv",
+      "expected_outcome": "review",
+      "tags": ["csv", "sku-resolution", "multi-line"]
+    },
+    {
+      "id": "edi-14",
+      "label": "CSV – Large Order (10 Lines)",
+      "description": "Order with 10 line items, all SKUs resolvable. Tests pipeline performance and ERP payload structure with multiple lines.",
+      "channel": "edi",
+      "file": "corpus/edi/order-014-large-order.csv",
+      "expected_outcome": "submit",
+      "tags": ["csv", "multi-line", "performance"]
+    },
+
+    // -- Price and quantity edge cases --
+    {
+      "id": "edi-15",
+      "label": "CSV – Price Discrepancy",
+      "description": "Line total in CSV does not match quantity × unit price. Tests whether the extraction catches and flags the discrepancy.",
+      "channel": "edi",
+      "file": "corpus/edi/order-015-price-discrepancy.csv",
+      "expected_outcome": "review",
+      "tags": ["csv", "price", "discrepancy"]
+    },
+    {
+      "id": "edi-16",
+      "label": "CSV – Zero Quantity Line",
+      "description": "One line item has quantity of zero. Tests business rule validation for invalid quantity.",
+      "channel": "edi",
+      "file": "corpus/edi/order-016-zero-qty.csv",
+      "expected_outcome": "clarify",
+      "tags": ["csv", "quantity", "clarify"]
+    },
+    {
+      "id": "edi-17",
+      "label": "XLSX – Missing PO Number",
+      "description": "Valid XLSX order with all line items present but no PO number — missing required order-level field.",
+      "channel": "edi",
+      "file": "corpus/edi/order-017-no-po-number.xlsx",
+      "expected_outcome": "clarify",
+      "tags": ["xlsx", "incomplete", "clarify"]
+    },
+
+    // -- File edge cases --
+    {
+      "id": "edi-18",
+      "label": "CSV – Empty File",
+      "description": "Zero-byte CSV file dropped in EDI inbox. Pipeline must handle gracefully — log error, move to edi-error/, do not crash.",
+      "channel": "edi",
+      "file": "corpus/edi/order-018-empty.csv",
+      "expected_outcome": "reject",
+      "notes": "Verify file moves to edi-error/ and error event written to audit log. Pipeline must continue running.",
+      "tags": ["csv", "edge-case", "error-handling"]
+    },
+    {
+      "id": "edi-19",
+      "label": "CSV – Headers Only (No Rows)",
+      "description": "CSV file with valid headers but no data rows. Tests parser behaviour with structurally valid but empty content.",
+      "channel": "edi",
+      "file": "corpus/edi/order-019-headers-only.csv",
+      "expected_outcome": "reject",
+      "tags": ["csv", "edge-case"]
+    },
+    {
+      "id": "edi-20",
+      "label": "XLSX – Corrupted File",
+      "description": "XLSX file with invalid/corrupted binary content. Parser must fail gracefully — error logged, file moved to edi-error/.",
+      "channel": "edi",
+      "file": "corpus/edi/order-020-corrupted.xlsx",
+      "expected_outcome": "reject",
+      "notes": "Create by renaming a .txt file to .xlsx. Verify pipeline does not crash.",
+      "tags": ["xlsx", "edge-case", "error-handling"]
+    },
+
+    // -- Email edge cases --
+    {
+      "id": "email-12",
+      "label": "Email – No Subject",
+      "description": "Valid PO email with no subject line. Tests extraction with missing metadata.",
+      "channel": "email",
+      "file": "corpus/emails/email-12-no-subject.eml",
+      "expected_outcome": "submit",
+      "tags": ["email", "edge-case"]
+    },
+    {
+      "id": "email-13",
+      "label": "Email – HTML Body Only",
+      "description": "PO email with only an HTML body and no plain text part. Tests mailparser HTML fallback.",
+      "channel": "email",
+      "file": "corpus/emails/email-13-html-only.eml",
+      "expected_outcome": "submit",
+      "tags": ["email", "html"]
+    },
+    {
+      "id": "email-14",
+      "label": "Email – Multiple Attachments",
+      "description": "Email with both a PDF and XLSX attachment. Tests parser selection logic — pipeline should use the PDF.",
+      "channel": "email",
+      "file": "corpus/emails/email-14-multi-attachment.eml",
+      "expected_outcome": "submit",
+      "tags": ["email", "pdf", "xlsx", "multi-attachment"]
+    },
+    {
+      "id": "email-15",
+      "label": "Email – Special Characters in Company Name",
+      "description": "Buyer company name contains accented characters and punctuation (e.g. 'Société Générale & Co.'). Tests extraction and customer matching with non-ASCII content.",
+      "channel": "email",
+      "file": "corpus/emails/email-15-special-chars.eml",
+      "expected_outcome": "review",
+      "tags": ["email", "encoding", "edge-case"]
+    },
+    {
+      "id": "email-16",
+      "label": "Email – Very Long Order (25 Lines)",
+      "description": "Email PO with 25 line items, all resolvable. Tests extraction token limits and ERP payload size.",
+      "channel": "email",
+      "file": "corpus/emails/email-16-long-order.eml",
+      "expected_outcome": "submit",
+      "tags": ["email", "multi-line", "performance"]
+    },
+
+    // -- International / currency --
+    {
+      "id": "email-17",
+      "label": "Email – International Address (Canada)",
+      "description": "PO from a Canadian buyer with a Canadian shipping address. Tests address parsing with non-US postal format.",
+      "channel": "email",
+      "file": "corpus/emails/email-17-international.eml",
+      "expected_outcome": "submit",
+      "tags": ["email", "international", "address"]
+    },
+    {
+      "id": "edi-21",
+      "label": "CSV – Non-USD Currency",
+      "description": "CSV order with currency set to CAD. Tests extraction and ERP payload with non-USD currency.",
+      "channel": "edi",
+      "file": "corpus/edi/order-021-cad-currency.csv",
+      "expected_outcome": "submit",
+      "tags": ["csv", "currency", "international"]
+    },
+
+    // -- X12 edge cases --
+    {
+      "id": "edi-22",
+      "label": "X12 850 – Multiple PO1 Segments",
+      "description": "X12 850 with 5 PO1 line item segments, mix of in-stock and backorderable items.",
+      "channel": "edi",
+      "file": "corpus/edi/order-022-850-multi-line.edi",
+      "expected_outcome": "submit",
+      "tags": ["x12", "multi-line", "backorder"]
+    },
+    {
+      "id": "edi-23",
+      "label": "X12 850 – Missing BEG Segment",
+      "description": "X12 850 with no BEG (beginning of order) segment — PO number unextractable. Tests parser error handling.",
+      "channel": "edi",
+      "file": "corpus/edi/order-023-850-no-beg.edi",
+      "expected_outcome": "clarify",
+      "tags": ["x12", "incomplete", "clarify"]
+    },
+
+    // -- Legitimacy edge cases --
+    {
+      "id": "email-18",
+      "label": "Email – Phishing / Social Engineering",
+      "description": "Email disguised as a PO but requesting payment details or credentials. Tests Claude's legitimacy assessment.",
+      "channel": "email",
+      "file": "corpus/emails/email-18-phishing.eml",
+      "expected_outcome": "reject",
+      "tags": ["email", "negative", "security", "reject"]
+    },
+    {
+      "id": "email-19",
+      "label": "Email – Order Cancellation",
+      "description": "Email explicitly cancelling a previous order rather than placing a new one. System should reject as not a new PO.",
+      "channel": "email",
+      "file": "corpus/emails/email-19-cancellation.eml",
+      "expected_outcome": "reject",
+      "tags": ["email", "negative", "cancellation", "reject"]
+    },
+    {
+      "id": "email-20",
+      "label": "Email – Order Amendment",
+      "description": "Email amending a quantity on an existing PO ('please change line 2 from 50 to 75 units'). System should route to Human Review — not auto-process as a new order.",
+      "channel": "email",
+      "file": "corpus/emails/email-20-amendment.eml",
+      "expected_outcome": "review",
+      "tags": ["email", "amendment"]
+    },
+
+    // -- Threshold boundary test --
+    {
+      "id": "email-21",
+      "label": "Email – Confidence at Submit Threshold",
+      "description": "Carefully crafted order where extraction confidence is expected to land at or just above CONFIDENCE_SUBMIT_THRESHOLD (85%). Tests boundary between submit and review.",
+      "channel": "email",
+      "file": "corpus/emails/email-21-threshold-boundary.eml",
+      "expected_outcome": "submit",
+      "notes": "Outcome may vary depending on Claude's extraction confidence. Treat as a monitor test rather than a hard assertion.",
+      "tags": ["email", "threshold", "boundary"]
+    },
+
+    // -- Rush / priority --
+    {
+      "id": "email-22",
+      "label": "Email – Rush Order",
+      "description": "PO email marked urgent with requested delivery within 24 hours. Tests extraction of priority signals and whether they flow through to the ERP payload.",
+      "channel": "email",
+      "file": "corpus/emails/email-22-rush-order.eml",
+      "expected_outcome": "submit",
+      "tags": ["email", "priority", "happy-path"]
+    },
+
+    // -- Partial stock --
+    {
+      "id": "edi-24",
+      "label": "CSV – Partial Stock (Split Needed)",
+      "description": "Order for 50 units of GSKT-A1-STD where only 8 are available and item is not backorderable. Tests Human Review routing with partial availability context.",
+      "channel": "edi",
+      "file": "corpus/edi/order-024-partial-stock.csv",
+      "expected_outcome": "review",
+      "tags": ["csv", "no-stock", "partial"]
+    },
+
+    // -- Repeat / reorder --
+    {
+      "id": "email-23",
+      "label": "Email – Repeat Order Reference",
+      "description": "Buyer references a previous order ('same as last month, PO-2026-0101'). Tests whether extraction handles implicit item lists and what confidence score results.",
+      "channel": "email",
+      "file": "corpus/emails/email-23-repeat-order.eml",
+      "expected_outcome": "review",
+      "notes": "Expected to be low confidence due to implicit item reference — Human Review with operator deciding whether to look up previous order.",
+      "tags": ["email", "ambiguous", "repeat"]
+    }
+  ]
+}

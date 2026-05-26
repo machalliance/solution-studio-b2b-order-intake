@@ -1,0 +1,34 @@
+From: purchasing@pellucidwholesale.example
+To: orders@b2b-intake.local
+Subject: Purchase Order PO-2026-1401 attached
+Date: Thu, 21 May 2026 10:00:00 +0000
+Message-ID: <email-14@pellucidwholesale.example>
+Content-Type: multipart/mixed; boundary="boundary-14"
+
+--boundary-14
+Content-Type: text/plain; charset=utf-8
+
+Please find our purchase order attached.
+
+--boundary-14
+Content-Type: application/pdf
+Content-Disposition: attachment; filename="po-1401.pdf"
+Content-Transfer-Encoding: base64
+
+JVBERi0xLjQKMSAwIG9iago8PCAvVHlwZSAvQ2F0YWxvZyAvUGFnZXMgMiAwIFIgPj4KZW5kb2Jq
+CjIgMCBvYmoKPDwgL1R5cGUgL1BhZ2VzIC9LaWRzIFszIDAgUl0gL0NvdW50IDEgPj4KZW5kb2Jq
+CjMgMCBvYmoKPDwgL1R5cGUgL1BhZ2UgL1BhcmVudCAyIDAgUiAvTWVkaWFCb3ggWzAgMCA2MTIg
+NzkyXQogICAvQ29udGVudHMgNCAwIFIgL1Jlc291cmNlcyA8PCAvRm9udCA8PCAvRjEgNSAwIFIg
+Pj4gPj4gPj4KZW5kb2JqCjQgMCBvYmoKPDwgL0xlbmd0aCAyNTAgPj4Kc3RyZWFtCkJUCi9GMSAx
+MiBUZgo1MCA3NTAgVGQKKFB1cmNoYXNlIE9yZGVyKSBUagowIC0yMCBUZAooUE8gTnVtYmVyOiBQ
+Ty0yMDI2LTE0MDEpIFRqCjAgLTIwIFRkCihPcmRlciBEYXRlOiAyMDI2LTA1LTIxKSBUagowIC0y
+MCBUZAooQWNjb3VudCBJRDogUEVMQy0wMDEpIFRqCjAgLTIwIFRkCihCdXllcjogUGVsbHVjaWQg
+V2hvbGVzYWxlIEx0ZCkgVGoKMCAtMjAgVGQKKEVtYWlsOiBwdXJjaGFzaW5nQHBlbGx1Y2lkd2hv
+bGVzYWxlLmV4YW1wbGUpIFRqCjAgLTIwIFRkCihMaW5lIDE6IFNLVTogV0RHVC1CTFVFLUwgIFF0
+eTogNDAgIFVPTTogRUEgIFVuaXQgUHJpY2U6IDEyLjUwKSBUagowIC0yMCBUZAooQ3VycmVuY3k6
+IFVTRCkgVGoKRVQKZW5kc3RyZWFtCmVuZG9iago1IDAgb2JqCjw8IC9UeXBlIC9Gb250IC9TdWJ0
+eXBlIC9UeXBlMSAvQmFzZUZvbnQgL0hlbHZldGljYSA+PgplbmRvYmoKeHJlZgowIDYKMDAwMDAw
+MDAwMCA2NTUzNSBmCnRyYWlsZXIKPDwgL1NpemUgNiAvUm9vdCAxIDAgUiA+PgpzdGFydHhyZWYK
+MAolJUVPRg==
+
+--boundary-14--

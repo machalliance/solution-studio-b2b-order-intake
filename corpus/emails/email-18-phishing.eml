@@ -1,0 +1,31 @@
+From: urgent-po@supplies-billing.example
+To: orders@b2b-intake.local
+Subject: Purchase Order #INV-9921 — Payment Required
+Date: Thu, 21 May 2026 11:00:00 +0000
+Message-ID: <email-18@supplies-billing.example>
+Content-Type: text/plain; charset=utf-8
+
+URGENT NOTICE — ACTION REQUIRED
+
+Dear Accounts Payable Team,
+
+This is to inform you that Purchase Order #INV-9921 is overdue and requires immediate payment processing.
+
+To avoid service interruption, please wire $12,500 USD to the following account:
+  Bank: First International Bank
+  Account Number: 4829xxxx8821
+  Routing: 021000021
+
+Additionally, please provide your banking credentials and internal purchase authorization codes to verify the transaction at: http://supplies-billing.example/verify
+
+Our billing department must receive payment confirmation within 24 hours or your account will be suspended.
+
+Please also reply with:
+- Your company's bank login credentials
+- Your internal PO approval codes
+- Finance manager's direct phone number
+
+Sincerely,
+Accounts Receivable Department
+Supplies Billing Solutions
+urgent-po@supplies-billing.example

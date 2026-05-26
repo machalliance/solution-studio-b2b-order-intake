@@ -1,0 +1,21 @@
+From: unknown@randomcompany.example
+To: orders@b2b-intake.local
+Subject: Order
+Date: Mon, 19 May 2026 10:30:00 +0000
+Message-ID: <email-07@randomcompany.example>
+Content-Type: multipart/mixed; boundary="boundary-07"
+
+--boundary-07
+Content-Type: text/plain
+
+Order attached.
+
+--boundary-07
+Content-Type: application/pdf
+Content-Disposition: attachment; filename="po-003.pdf"
+Content-Transfer-Encoding: base64
+
+JVBERi0xLjQKUE8gTnVtYmVyOiBVTktOT1dOLTAwMQpPcmRlciBEYXRlOiAyMDI2LTA1LTE5
+CkJ1eWVyOiBSYW5kb20gQ29tcGFueSBMdGQKTGluZSAxOiBXREdULUJMVUUtTCB4IDEw
+
+--boundary-07--

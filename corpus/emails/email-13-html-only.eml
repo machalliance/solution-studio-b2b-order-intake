@@ -1,0 +1,25 @@
+From: orders@torchlinesupplies.example
+To: orders@b2b-intake.local
+Subject: Purchase Order PO-2026-1301
+Date: Thu, 21 May 2026 09:45:00 +0000
+Message-ID: <email-13@torchlinesupplies.example>
+Content-Type: text/html; charset=utf-8
+
+<html>
+<body>
+<p><strong>Purchase Order</strong></p>
+<p>PO Number: PO-2026-1301</p>
+<p>Order Date: 2026-05-21</p>
+<p>Account ID: TRCL-002</p>
+<p><strong>Buyer:</strong></p>
+<p>Company: Torchline Supplies Co<br>
+Email: orders@torchlinesupplies.example<br>
+Phone: +1-555-0202<br>
+Address: 200 Trade Ave, Denver, CO 99002</p>
+<p>Ship To: 200 Trade Ave, Denver, CO 99002</p>
+<p>Requested Delivery: 2026-06-04</p>
+<p><strong>Line Items:</strong></p>
+<p>1. SKU: BOLT-M8-500, Description: Torchline M8 Bolt Set, Qty: 50, UOM: SET, Unit Price: 22.00</p>
+<p>Currency: USD</p>
+</body>
+</html>

@@ -1,0 +1,29 @@
+From: purchasing@pellucidwholesale.example
+To: orders@b2b-intake.local
+Subject: URGENT: Rush Purchase Order PO-2026-2201
+Date: Thu, 21 May 2026 12:00:00 +0000
+Message-ID: <email-22@pellucidwholesale.example>
+Content-Type: text/plain; charset=utf-8
+
+URGENT — Rush Purchase Order
+
+PO Number: PO-2026-2201
+Order Date: 2026-05-21
+Account ID: PELC-001
+
+Buyer:
+  Company: Pellucid Wholesale Ltd
+  Email: purchasing@pellucidwholesale.example
+  Phone: +1-555-0101
+  Address: 100 Commerce St, Portland, OR 99001
+
+Ship To: 100 Commerce St, Portland, OR 99001
+Requested Delivery: 2026-05-22
+
+URGENT — Rush delivery required by 2026-05-22
+
+Line Items:
+  1. SKU: WDGT-BLUE-L, Description: Apex Widget Blue Large, Qty: 25, UOM: EA, Unit Price: 12.50
+  2. SKU: BOLT-M8-500, Description: Torchline M8 Bolt Set, Qty: 50, UOM: SET, Unit Price: 22.00
+
+Currency: USD

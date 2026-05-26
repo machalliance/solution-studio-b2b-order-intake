@@ -1,0 +1,25 @@
+From: orders@maple-distribution.ca.example
+To: orders@b2b-intake.local
+Subject: Purchase Order PO-2026-1701
+Date: Thu, 21 May 2026 10:45:00 +0000
+Message-ID: <email-17@maple-distribution.ca.example>
+Content-Type: text/plain; charset=utf-8
+
+Purchase Order
+
+PO Number: PO-2026-1701
+Order Date: 2026-05-21
+
+Buyer:
+  Company: Maple Distribution Inc.
+  Email: orders@maple-distribution.ca.example
+  Phone: +1-416-555-0100
+  Address: 55 King St W, Toronto, ON M5V 3A8, Canada
+
+Ship To: 55 King St W, Toronto, ON M5V 3A8, Canada
+Requested Delivery: 2026-06-10
+
+Line Items:
+  1. SKU: WDGT-BLUE-L, Description: Apex Widget Blue Large, Qty: 15, UOM: EA, Unit Price: 16.00
+
+Currency: CAD

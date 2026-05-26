@@ -1,0 +1,18 @@
+From: buyer@solstice-procurement-group.example
+To: orders@b2b-intake.local
+Subject: Purchase Request
+Date: Tue, 20 May 2026 08:30:00 +0000
+Message-ID: <email-09@solstice-procurement-group.example>
+Content-Type: text/plain; charset=utf-8
+
+Hello,
+
+Please process the following order.
+
+PO: SPG-0099
+Date: 2026-05-20
+
+Company: Solstice Procurement Group Inc.
+Address: 400 Supply Boulevard, Atlanta, Georgia 30301
+
+Line 1: FILT-HX-220, Qty: 10, Price: 45.00

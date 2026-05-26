@@ -1,0 +1,60 @@
+{
+  "customers": [
+    {
+      "account_id": "PELC-001",
+      "company_name": "Pellucid Wholesale Ltd",
+      "email_domains": ["pellucidwholesale.example"],
+      "contact_emails": ["purchasing@pellucidwholesale.example"],
+      "phone_numbers": ["+15550101"],
+      "address": {
+        "street": "100 Commerce St",
+        "city": "Portland",
+        "state": "OR",
+        "postal_code": "99001",
+        "country": "US"
+      }
+    },
+    {
+      "account_id": "TRCL-002",
+      "company_name": "Torchline Supplies Co",
+      "email_domains": ["torchlinesupplies.example"],
+      "contact_emails": ["orders@torchlinesupplies.example"],
+      "phone_numbers": ["+15550202"],
+      "address": {
+        "street": "200 Trade Ave",
+        "city": "Denver",
+        "state": "CO",
+        "postal_code": "99002",
+        "country": "US"
+      }
+    },
+    {
+      "account_id": "IRNF-003",
+      "company_name": "Ironfeld Industrial",
+      "email_domains": ["ironfeldindustrial.example"],
+      "contact_emails": ["procurement@ironfeldindustrial.example"],
+      "phone_numbers": ["+15550303"],
+      "address": {
+        "street": "300 Industry Rd",
+        "city": "Detroit",
+        "state": "MI",
+        "postal_code": "99003",
+        "country": "US"
+      }
+    },
+    {
+      "account_id": "SOLS-004",
+      "company_name": "Solstice Procurement",
+      "email_domains": ["solsticeprocurement.example"],
+      "contact_emails": ["buying@solsticeprocurement.example"],
+      "phone_numbers": ["+15550404"],
+      "address": {
+        "street": "400 Supply Blvd",
+        "city": "Atlanta",
+        "state": "GA",
+        "postal_code": "99004",
+        "country": "US"
+      }
+    }
+  ]
+}

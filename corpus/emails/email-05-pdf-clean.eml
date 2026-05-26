@@ -1,0 +1,23 @@
+From: orders@torchlinesupplies.example
+To: orders@b2b-intake.local
+Subject: PO-2026-0055 attached
+Date: Mon, 19 May 2026 10:00:00 +0000
+Message-ID: <email-05@torchlinesupplies.example>
+Content-Type: multipart/mixed; boundary="boundary-05"
+
+--boundary-05
+Content-Type: text/plain; charset=utf-8
+
+Please find our purchase order attached.
+
+--boundary-05
+Content-Type: application/pdf
+Content-Disposition: attachment; filename="po-001.pdf"
+Content-Transfer-Encoding: base64
+
+JVBERi0xLjQKUHVyY2hhc2UgT3JkZXIKUE8gTnVtYmVyOiBQTy0yMDI2LTAwNTUKT3JkZXIg
+RGF0ZTogMjAyNi0wNS0xOQpBY2NvdW50IElEOiBUUkNMLTAwMgpCdXllcjogVG9yY2hsaW5l
+IFN1cHBsaWVzIENvCkVtYWlsOiBvcmRlcnNAdG9yY2hsaW5lc3VwcGxpZXMuZXhhbXBsZQpM
+aW5lIDE6IEJPTENULU04LTUwMCwgUXR5OiAxMDAsIFVPTTogU0VULCBQcmljZTogMjIuMDA=
+
+--boundary-05--

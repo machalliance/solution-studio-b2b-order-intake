@@ -1,0 +1,25 @@
+From: purchasing@pellucidwholesale.example
+To: orders@b2b-intake.local
+Date: Thu, 21 May 2026 09:30:00 +0000
+Message-ID: <email-12@pellucidwholesale.example>
+Content-Type: text/plain; charset=utf-8
+
+Purchase Order
+
+PO Number: PO-2026-1201
+Order Date: 2026-05-21
+Account ID: PELC-001
+
+Buyer:
+  Company: Pellucid Wholesale Ltd
+  Email: purchasing@pellucidwholesale.example
+  Phone: +1-555-0101
+  Address: 100 Commerce St, Portland, OR 99001
+
+Ship To: 100 Commerce St, Portland, OR 99001
+Requested Delivery: 2026-06-04
+
+Line Items:
+  1. SKU: WDGT-BLUE-L, Description: Apex Widget Blue Large, Qty: 30, UOM: EA, Unit Price: 12.50
+
+Currency: USD

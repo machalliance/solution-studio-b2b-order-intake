@@ -1,0 +1,11 @@
+po_number,order_date,account_id,buyer_company,buyer_email,line_number,buyer_sku,description,quantity,unit_of_measure,unit_price
+PO-2026-1402,2026-05-21,SOLS-004,Solstice Procurement,buying@solsticeprocurement.example,1,WDGT-BLUE-L,Apex Widget Blue Large,10,EA,12.50
+PO-2026-1402,2026-05-21,SOLS-004,Solstice Procurement,buying@solsticeprocurement.example,2,WDGT-BLUE-L,Apex Widget Blue Large,15,EA,12.50
+PO-2026-1402,2026-05-21,SOLS-004,Solstice Procurement,buying@solsticeprocurement.example,3,WDGT-BLUE-L,Apex Widget Blue Large,20,EA,12.50
+PO-2026-1402,2026-05-21,SOLS-004,Solstice Procurement,buying@solsticeprocurement.example,4,WDGT-BLUE-L,Apex Widget Blue Large,25,EA,12.50
+PO-2026-1402,2026-05-21,SOLS-004,Solstice Procurement,buying@solsticeprocurement.example,5,WDGT-BLUE-L,Apex Widget Blue Large,30,EA,12.50
+PO-2026-1402,2026-05-21,SOLS-004,Solstice Procurement,buying@solsticeprocurement.example,6,BOLT-M8-500,Torchline M8 Bolt Set,50,SET,22.00
+PO-2026-1402,2026-05-21,SOLS-004,Solstice Procurement,buying@solsticeprocurement.example,7,BOLT-M8-500,Torchline M8 Bolt Set,75,SET,22.00
+PO-2026-1402,2026-05-21,SOLS-004,Solstice Procurement,buying@solsticeprocurement.example,8,BOLT-M8-500,Torchline M8 Bolt Set,100,SET,22.00
+PO-2026-1402,2026-05-21,SOLS-004,Solstice Procurement,buying@solsticeprocurement.example,9,BOLT-M8-500,Torchline M8 Bolt Set,60,SET,22.00
+PO-2026-1402,2026-05-21,SOLS-004,Solstice Procurement,buying@solsticeprocurement.example,10,BOLT-M8-500,Torchline M8 Bolt Set,40,SET,22.00

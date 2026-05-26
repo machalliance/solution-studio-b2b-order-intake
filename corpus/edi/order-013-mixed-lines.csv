@@ -1,0 +1,5 @@
+po_number,order_date,account_id,buyer_company,buyer_email,line_number,buyer_sku,description,quantity,unit_of_measure,unit_price
+PO-2026-1302,2026-05-21,PELC-001,Pellucid Wholesale Ltd,purchasing@pellucidwholesale.example,1,WDGT-BLUE-L,Apex Widget Blue Large,10,EA,12.50
+PO-2026-1302,2026-05-21,PELC-001,Pellucid Wholesale Ltd,purchasing@pellucidwholesale.example,2,BOLT-M8-500,Torchline M8 Bolt Set,20,SET,22.00
+PO-2026-1302,2026-05-21,PELC-001,Pellucid Wholesale Ltd,purchasing@pellucidwholesale.example,3,WIDGET-BLUE,Widget Blue,5,EA,12.50
+PO-2026-1302,2026-05-21,PELC-001,Pellucid Wholesale Ltd,purchasing@pellucidwholesale.example,4,XYZZY-UNKNOWN-001,Unknown Item,3,EA,9.99

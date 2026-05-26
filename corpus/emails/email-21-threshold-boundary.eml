@@ -1,0 +1,19 @@
+From: purchasing@pellucidwholesale.example
+To: orders@b2b-intake.local
+Subject: Purchase Order PO-2026-2101
+Date: Thu, 21 May 2026 11:45:00 +0000
+Message-ID: <email-21@pellucidwholesale.example>
+Content-Type: text/plain; charset=utf-8
+
+Purchase Order
+
+PO Number: PO-2026-2101
+Order Date: 2026-05-21
+Account ID: PELC-001
+
+Buyer:
+  Company: Pellucid Wholesale Ltd
+  Email: purchasing@pellucidwholesale.example
+
+Line Items:
+  1. SKU: WDGT-BLUE-L, Qty: 20, UOM: EA, Unit Price: 12.50

@@ -1,0 +1,22 @@
+From: buyer@cascade-phone-test.example
+To: orders@b2b-intake.local
+Subject: Purchase Order PO-2026-1001
+Date: Thu, 21 May 2026 09:00:00 +0000
+Message-ID: <email-10@cascade-phone-test.example>
+Content-Type: text/plain; charset=utf-8
+
+Purchase Order
+
+PO Number: PO-2026-1001
+Order Date: 2026-05-21
+
+Buyer:
+  Company: Cascade Phone Test Corp
+  Email: buyer@cascade-phone-test.example
+  Phone: +1-555-0202
+  Address: 999 Test Blvd, Seattle, WA 98101
+
+Line Items:
+  1. SKU: BOLT-M8-500, Description: Torchline M8 Bolt Set, Qty: 25, UOM: SET, Unit Price: 22.00
+
+Currency: USD

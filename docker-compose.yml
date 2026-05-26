@@ -1,0 +1,91 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: b2border
+      POSTGRES_PASSWORD: b2border
+      POSTGRES_DB: b2border
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U b2border"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  mailpit:
+    image: axllent/mailpit
+    restart: unless-stopped
+    ports:
+      - "${MAILPIT_WEB_PORT:-8025}:8025"
+      - "1025:1025"
+    environment:
+      MP_SMTP_AUTH_ALLOW_INSECURE: "true"
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://localhost:8025/livez"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  pipeline:
+    build:
+      context: ./services/pipeline
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+      mailpit:
+        condition: service_healthy
+    env_file: .env
+    volumes:
+      - ./edi-inbox:/app/edi-inbox
+      - ./edi-error:/app/edi-error
+      - ./edi-outbound:/app/edi-outbound
+      - ./config:/app/config:ro
+      - ./corpus:/app/corpus:ro
+    ports:
+      - "${PIPELINE_PORT:-3002}:3002"
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://localhost:3002/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  erp-stub:
+    build:
+      context: ./services/erp-stub
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+    env_file: .env
+    ports:
+      - "${ERP_STUB_PORT:-3001}:3001"
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://localhost:3001/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  agent-ui:
+    build:
+      context: ./services/agent-ui
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    depends_on:
+      pipeline:
+        condition: service_healthy
+    env_file: .env
+    ports:
+      - "${AGENT_UI_PORT:-3000}:3000"
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://localhost:3000/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  postgres_data:

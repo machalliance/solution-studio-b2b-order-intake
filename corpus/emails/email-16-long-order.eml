@@ -1,0 +1,50 @@
+From: purchasing@pellucidwholesale.example
+To: orders@b2b-intake.local
+Subject: Purchase Order PO-2026-1601
+Date: Thu, 21 May 2026 10:30:00 +0000
+Message-ID: <email-16@pellucidwholesale.example>
+Content-Type: text/plain; charset=utf-8
+
+Purchase Order
+
+PO Number: PO-2026-1601
+Order Date: 2026-05-21
+Account ID: PELC-001
+
+Buyer:
+  Company: Pellucid Wholesale Ltd
+  Email: purchasing@pellucidwholesale.example
+  Phone: +1-555-0101
+  Address: 100 Commerce St, Portland, OR 99001
+
+Ship To: 100 Commerce St, Portland, OR 99001
+Requested Delivery: 2026-06-18
+
+Line Items:
+  1. SKU: WDGT-BLUE-L, Description: Apex Widget Blue Large, Qty: 10, UOM: EA, Unit Price: 12.50
+  2. SKU: BOLT-M8-500, Description: Torchline M8 Bolt Set, Qty: 20, UOM: SET, Unit Price: 22.00
+  3. SKU: WDGT-BLUE-L, Description: Apex Widget Blue Large, Qty: 10, UOM: EA, Unit Price: 12.50
+  4. SKU: BOLT-M8-500, Description: Torchline M8 Bolt Set, Qty: 20, UOM: SET, Unit Price: 22.00
+  5. SKU: WDGT-BLUE-L, Description: Apex Widget Blue Large, Qty: 10, UOM: EA, Unit Price: 12.50
+  6. SKU: BOLT-M8-500, Description: Torchline M8 Bolt Set, Qty: 20, UOM: SET, Unit Price: 22.00
+  7. SKU: WDGT-BLUE-L, Description: Apex Widget Blue Large, Qty: 10, UOM: EA, Unit Price: 12.50
+  8. SKU: BOLT-M8-500, Description: Torchline M8 Bolt Set, Qty: 20, UOM: SET, Unit Price: 22.00
+  9. SKU: WDGT-BLUE-L, Description: Apex Widget Blue Large, Qty: 10, UOM: EA, Unit Price: 12.50
+  10. SKU: BOLT-M8-500, Description: Torchline M8 Bolt Set, Qty: 20, UOM: SET, Unit Price: 22.00
+  11. SKU: WDGT-BLUE-L, Description: Apex Widget Blue Large, Qty: 10, UOM: EA, Unit Price: 12.50
+  12. SKU: BOLT-M8-500, Description: Torchline M8 Bolt Set, Qty: 20, UOM: SET, Unit Price: 22.00
+  13. SKU: WDGT-BLUE-L, Description: Apex Widget Blue Large, Qty: 10, UOM: EA, Unit Price: 12.50
+  14. SKU: BOLT-M8-500, Description: Torchline M8 Bolt Set, Qty: 20, UOM: SET, Unit Price: 22.00
+  15. SKU: WDGT-BLUE-L, Description: Apex Widget Blue Large, Qty: 10, UOM: EA, Unit Price: 12.50
+  16. SKU: BOLT-M8-500, Description: Torchline M8 Bolt Set, Qty: 20, UOM: SET, Unit Price: 22.00
+  17. SKU: WDGT-BLUE-L, Description: Apex Widget Blue Large, Qty: 10, UOM: EA, Unit Price: 12.50
+  18. SKU: BOLT-M8-500, Description: Torchline M8 Bolt Set, Qty: 20, UOM: SET, Unit Price: 22.00
+  19. SKU: WDGT-BLUE-L, Description: Apex Widget Blue Large, Qty: 10, UOM: EA, Unit Price: 12.50
+  20. SKU: BOLT-M8-500, Description: Torchline M8 Bolt Set, Qty: 20, UOM: SET, Unit Price: 22.00
+  21. SKU: WDGT-BLUE-L, Description: Apex Widget Blue Large, Qty: 10, UOM: EA, Unit Price: 12.50
+  22. SKU: BOLT-M8-500, Description: Torchline M8 Bolt Set, Qty: 20, UOM: SET, Unit Price: 22.00
+  23. SKU: WDGT-BLUE-L, Description: Apex Widget Blue Large, Qty: 10, UOM: EA, Unit Price: 12.50
+  24. SKU: BOLT-M8-500, Description: Torchline M8 Bolt Set, Qty: 20, UOM: SET, Unit Price: 22.00
+  25. SKU: WDGT-BLUE-L, Description: Apex Widget Blue Large, Qty: 10, UOM: EA, Unit Price: 12.50
+
+Currency: USD

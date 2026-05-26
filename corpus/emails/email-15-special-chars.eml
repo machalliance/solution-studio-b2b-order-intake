@@ -1,0 +1,25 @@
+From: procurement@soc-gen-trading.example
+To: orders@b2b-intake.local
+Subject: Purchase Order PO-2026-1501
+Date: Thu, 21 May 2026 10:15:00 +0000
+Message-ID: <email-15@soc-gen-trading.example>
+Content-Type: text/plain; charset=utf-8
+
+Purchase Order
+
+PO Number: PO-2026-1501
+Order Date: 2026-05-21
+
+Buyer:
+  Company: Société Générale & Co.
+  Email: procurement@soc-gen-trading.example
+  Phone: +1-555-0999
+  Address: 750 Boulevard Haussmann, Paris, 75009, France
+
+Ship To: 750 Boulevard Haussmann, Paris, 75009, France
+Requested Delivery: 2026-06-10
+
+Line Items:
+  1. SKU: FILT-HX-220, Description: Solstice Filter HX 220, Qty: 5, UOM: EA, Unit Price: 45.00
+
+Currency: USD
