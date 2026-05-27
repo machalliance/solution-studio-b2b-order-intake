@@ -460,6 +460,26 @@
       "expected_outcome": "review",
       "notes": "Expected to be low confidence due to implicit item reference — Human Review with operator deciding whether to look up previous order.",
       "tags": ["email", "ambiguous", "repeat"]
+    },
+    {
+      "id": "email-24",
+      "label": "Email – Zero Price (Contract Draw)",
+      "description": "Known buyer submits a Q2 release against an annual prepaid contract. All line prices are 0.00 per the contract billing arrangement, not as an attempt to exploit pricing. Tests ZERO_PRICE_ACTION policy routing.",
+      "channel": "email",
+      "file": "corpus/emails/email-24-zero-price-contract.eml",
+      "expected_outcome": "review",
+      "notes": "Expected outcome depends on ZERO_PRICE_ACTION setting. Default 'review' routes to Human Review. Set to 'reject' to silently reject; 'approve' to pass through to ERP.",
+      "tags": ["email", "zero-price", "contract", "security"]
+    },
+    {
+      "id": "email-25",
+      "label": "Email – Zero Price (Warranty Replacement)",
+      "description": "Known buyer submits a warranty replacement order referencing an approved RMA. Line prices are 0.00 per the MSA warranty clause, with finance approval forwarded in the email thread. Tests ZERO_PRICE_ACTION policy routing.",
+      "channel": "email",
+      "file": "corpus/emails/email-25-zero-price-warranty.eml",
+      "expected_outcome": "review",
+      "notes": "Expected outcome depends on ZERO_PRICE_ACTION setting. Default 'review' routes to Human Review. Set to 'reject' to silently reject; 'approve' to pass through to ERP.",
+      "tags": ["email", "zero-price", "warranty", "rma", "security"]
     }
   ]
 }

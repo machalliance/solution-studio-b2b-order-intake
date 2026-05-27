@@ -1,0 +1,55 @@
+From: purchasing@pellucidwholesale.example
+To: orders@b2b-intake.local
+Subject: FW: PO-2026-0225 (warranty replacement, ref. RMA-1187)
+Date: Wed, 27 May 2026 08:14:00 +0000
+Message-ID: <email-25@pellucidwholesale.example>
+Content-Type: text/plain; charset=utf-8
+
+Hi orders team,
+
+Forwarding from our AP / warranty desk - this is the replacement shipment
+for RMA-1187 (defective units from PO-2026-0094, shipped Q1). Please process
+under the existing warranty terms in our MSA - no invoice, $0.00 line totals
+as agreed.
+
+Approval thread below for your records.
+
+Pellucid Procurement
+
+Purchase Order
+
+PO Number: PO-2026-0225
+Order Date: 2026-05-27
+Account ID: PELC-001
+RMA Reference: RMA-1187
+Original PO: PO-2026-0094
+
+Buyer:
+  Company: Pellucid Wholesale Ltd
+  Email: purchasing@pellucidwholesale.example
+  Phone: +1-555-0101
+  Address: 100 Commerce St, Portland, OR 99001
+
+Ship To: 100 Commerce St, Portland, OR 99001
+Requested Delivery: 2026-06-10
+
+Line Items:
+  1. SKU: WDGT-BLUE-L, Description: Pelc Widget Blue Lg (warranty replacement), Qty: 12, UOM: EA, Unit Price: 0.00
+
+Currency: USD
+Notes: Warranty replacement under MSA s.7.4. Zero price per approved RMA-1187. No invoice required.
+
+-------- Forwarded message --------
+From:    finance@pellucidwholesale.example
+To:      purchasing@pellucidwholesale.example
+Cc:      apdesk@b2b-supplier.example
+Date:    Mon, 26 May 2026 17:42:00 +0000
+Subject: RE: Warranty replacement PO-2026-0094 / RMA-1187 - approved
+
+Confirmed approved at $0.00 per the warranty clause (MSA s.7.4).
+Standard replacement workflow - no AP/credit memo required on our side,
+supplier processes as zero-priced replacement under the existing RMA.
+
+Best,
+S. Okafor
+VP Finance, Pellucid Wholesale

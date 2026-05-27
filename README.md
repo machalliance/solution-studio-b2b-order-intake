@@ -192,25 +192,61 @@ Copy `.env.example` to `.env` before starting. The only required change is `ANTH
 | `CONFIDENCE_SUBMIT_THRESHOLD` | `70` | Auto-submit when extraction confidence >= this |
 | `CONFIDENCE_REVIEW_THRESHOLD` | `50` | Route to Human Review when confidence < this |
 | `CONFIDENCE_UNREADABLE_THRESHOLD` | `5` | Treat as unreadable, request resubmission |
-| `SKU_AUTO_THRESHOLD` | `90` | Auto-accept AI SKU match at this confidence |
-| `SKU_REVIEW_THRESHOLD` | `50` | Surface SKU candidates for operator selection |
-| `CUSTOMER_AUTO_THRESHOLD` | `90` | Auto-accept AI customer match at this confidence |
+| `SKU_AUTO_THRESHOLD` | `90` | Auto-accept AI SKU match above this; below routes to clarify or review |
+| `SKU_REVIEW_THRESHOLD` | `50` | AI SKU match below this seeks clarification; between this and auto threshold routes to review |
+| `SKU_FUZZY_ALWAYS_REVIEW` | `false` | When true, any AI-resolved SKU match routes to review regardless of confidence score |
+| `SKU_MAX_CANDIDATES` | `3` | Maximum SKU candidates the AI resolver returns per line item |
+| `CUSTOMER_AUTO_THRESHOLD` | `90` | Auto-accept AI customer match above this |
+| `CUSTOMER_REVIEW_THRESHOLD` | `60` | AI customer match below this seeks clarification; between this and auto threshold routes to review |
+| `CUSTOMER_FUZZY_ALWAYS_REVIEW` | `false` | When true, any AI-resolved customer match routes to review regardless of confidence score |
+| `CUSTOMER_MAX_CANDIDATES` | `3` | Maximum customer candidates the AI matcher returns |
+
+### Routing policies
+
+| Variable | Default | Options | Description |
+|----------|---------|---------|-------------|
+| `ZERO_PRICE_ACTION` | `review` | `reject`, `review`, `approve` | How to handle line items with an explicit unit price of 0.00. Zero pricing can be legitimate (contract draws, warranty replacements) or adversarial. `reject` silently rejects the order; `review` routes to Human Review for operator decision; `approve` passes through to the ERP unchanged. |
+| `BACKORDER_AUTO_SUBMIT` | `true` | `true`, `false` | When true, backorderable items auto-submit with `backorder_eta` in the ERP payload. When false, any backorderable line routes to Human Review. |
 
 ### Processing limits
 
 | Variable | Default | Description |
 |----------|---------|-------------|
-| `DUPLICATE_PO_WINDOW_DAYS` | `30` | Days to check for duplicate PO numbers |
-| `MAX_LINE_ITEMS` | `100` | Orders exceeding this route to review |
-| `GRAPH_TIMEOUT_MS` | `60000` | Max ms a graph invocation may run |
+| `DUPLICATE_PO_WINDOW_DAYS` | `30` | Days back to check for a duplicate PO number + buyer account ID combination. Set to `0` to disable. |
+| `MAX_LINE_ITEMS` | `100` | Orders with more line items than this route to Human Review. Guards against malformed documents producing hundreds of phantom lines. |
+| `PDF_MIN_TEXT_LENGTH` | `50` | PDFs with fewer extracted characters than this are treated as likely scanned images and assigned low confidence. |
+| `GRAPH_TIMEOUT_MS` | `60000` | Maximum ms a graph invocation may run before the channel abandons it. Prevents a hanging Claude call from blocking the poll loop. |
+
+### API behaviour
+
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `ENABLE_TEST_ENDPOINTS` | `true` | When false, disables `/api/v1/test/*` endpoints (clear, run, manifest, preview). Must be `false` in production — these endpoints truncate the database. |
+| `API_RATE_LIMIT` | `100` | Max requests per minute per IP across all `/api/v1` routes. |
+| `TEST_RUN_RATE_LIMIT` | `120` | Max `/api/v1/test/run` calls per minute per IP. Set high enough to run the full 52-test corpus in one pass. |
+| `LIVE_FEED_LIMIT` | `100` | Maximum number of orders returned by the Live Feed. |
+
+### AI resilience
+
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `AI_RETRY_MAX_ATTEMPTS` | `3` | Maximum retry attempts for transient Claude API failures (extraction, SKU resolution, customer matching). |
+| `AI_RETRY_BASE_DELAY_MS` | `1000` | Base delay between retries in ms. Doubles each attempt: 1s -> 2s -> 4s. |
+
+### Polling intervals
+
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `INBOUND_MAIL_POLL_INTERVAL_MS` | `5000` | How often the email channel polls Mailpit for new messages. Only used when `INBOUND_MAIL_PROVIDER=mailpit`. |
+| `EDI_POLL_INTERVAL_MS` | `2000` | How often the EDI channel scans the inbox folder for new files. |
 
 ### EDI paths (inside container)
 
 | Variable | Default | Description |
 |----------|---------|-------------|
-| `EDI_INBOX_PATH` | `/app/edi-inbox` | Drop X12/CSV/XLSX files here |
-| `EDI_ERROR_PATH` | `/app/edi-error` | Processed and errored files archived here |
-| `EDI_OUTBOUND_PATH` | `/app/edi-outbound` | 864/855 replies written here |
+| `EDI_INBOX_PATH` | `/app/edi-inbox` | Drop X12/CSV/XLSX files here to trigger processing. |
+| `EDI_ERROR_PATH` | `/app/edi-error` | Processed and errored files are archived here with a `processed-` prefix. |
+| `EDI_OUTBOUND_PATH` | `/app/edi-outbound` | 864 clarification and 855 rejection replies are written here. |
 
 ---
 
@@ -352,6 +388,34 @@ Use the **Clear All Test Data** button in the Agent Control Interface, or `POST 
 | Email (prod) | SendGrid Inbound Parse / mailparser |
 | EDI | ANSI X12 (850 / 864 / 855) |
 | Containerisation | Docker Compose |
+
+---
+
+## Security
+
+This is a reference implementation and has not been hardened for production use. Before deploying in a production environment, the following areas require attention.
+
+### Prompt injection
+
+The pipeline passes untrusted inbound content (email bodies, EDI files, attachments) directly to Claude for extraction. A malicious sender can craft input that attempts to manipulate the model's behaviour - for example, embedding instructions to override the extraction prompt, approve orders with invalid prices, or bypass validation rules. This was demonstrated during evaluation: a crafted email with $0 line items was processed and auto-submitted despite checks intended to prevent that outcome.
+
+Recommended mitigations:
+- Wrap all untrusted content in clearly-labelled tags before passing it to the model, for example `<untrusted_order_content>...</untrusted_order_content>`, and add explicit instructions in the system prompt that the model must treat that block as data, not instructions
+- Apply output validation after extraction - reject or flag results where extracted values fall outside acceptable ranges (e.g. zero or negative unit prices)
+- Review [OWASP guidance on LLM prompt injection (LLM01)](https://owasp.org/www-project-top-10-for-large-language-model-applications/) before deploying any AI pipeline that processes untrusted content
+
+### Input handling
+
+- Inbound email and EDI content is not currently sanitised before storage or display. Validate and sanitise all input at the channel boundary.
+- File-based EDI ingestion does not restrict file size or type beyond extension checking. Add size limits and content validation before processing.
+- The `ENABLE_TEST_ENDPOINTS=true` flag exposes endpoints that truncate the database. This must be set to `false` in any non-development environment.
+
+### Authentication and network exposure
+
+- The pipeline API and Agent Control Interface have no authentication. In production, place both behind an API gateway or reverse proxy with appropriate access controls.
+- The SendGrid inbound webhook endpoint should be protected with a shared secret (`SENDGRID_INBOUND_WEBHOOK_KEY`) to prevent unauthorised order injection.
+
+For a general checklist, refer to the [OWASP Top 10 for LLM Applications](https://owasp.org/www-project-top-10-for-large-language-model-applications/).
 
 ---
 

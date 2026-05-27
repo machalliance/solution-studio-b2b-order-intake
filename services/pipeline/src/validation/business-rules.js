@@ -66,6 +66,13 @@ export function validateBusinessRules(order) {
       // Use 1-based line number in the error code to match MACH ODM lineNumber convention
       if (!line[field]) errors.push(`line_${i + 1}_missing_${field}`);
     }
+
+    // Detect explicitly zero unit prices. null/undefined means the buyer omitted pricing
+    // (handled by SKU resolution / clarify path); Number(0) means they sent $0.00 which
+    // is suspicious and routed per the ZERO_PRICE_ACTION policy.
+    if (line.unitPrice !== null && line.unitPrice !== undefined && Number(line.unitPrice) === 0) {
+      errors.push(`line_${i + 1}_zero_unit_price`);
+    }
   }
 
   return { errors };

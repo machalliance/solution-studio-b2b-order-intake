@@ -137,6 +137,28 @@ export function makeRoutingNode({ logging }) {
       reason  = 'Unrecognised sender with no extractable order content - rejected';
     }
 
+    // -- 8b. Zero-price line items --------------------------------------------
+    // Policy is operator-configurable via ZERO_PRICE_ACTION (swap without code changes):
+    //   'reject'  - silent reject; treat as suspicious / possible prompt-injection attempt
+    //   'review'  - pause for operator confirmation before any ERP action (default)
+    //   'approve' - pass through; let the ERP or downstream pricing rules decide
+    else if (
+      errors.some(e => e.includes('zero_unit_price')) &&
+      config.ZERO_PRICE_ACTION !== 'approve'
+    ) {
+      const zeroLines = errors.filter(e => e.includes('zero_unit_price'));
+      const lineNums  = zeroLines.map(e => e.match(/^line_(\d+)_/)?.[1]).join(', ');
+      const linePlural = zeroLines.length > 1 ? 's' : '';
+      if (config.ZERO_PRICE_ACTION === 'reject') {
+        outcome = 'reject';
+        reason  = `Zero-price line item${linePlural} on line${linePlural}: ${lineNums} - rejected per ZERO_PRICE_ACTION=reject policy`;
+      } else {
+        // 'review' is the default - operator confirms before anything reaches ERP
+        outcome = 'review';
+        reason  = `Zero-price line item${linePlural} on line${linePlural}: ${lineNums} - routed to Human Review per ZERO_PRICE_ACTION=review policy`;
+      }
+    }
+
     // -- 9. Human review required ---------------------------------------------
     // Covers: unknown customer, SKU needs operator confirmation, stock issues,
     // or extraction confidence too low to trust auto-submit.
@@ -220,7 +242,10 @@ function buildReviewReason(errors, skuResolutions, confidenceScore) {
     parts.push(`ambiguous SKUs with candidates for operator selection on line${skuClarifyWithCandidates.length > 1 ? 's' : ''}: ${skuClarifyWithCandidates.map(r => r.lineNumber).join(', ')}`);
   const noStock = errors.filter(e => e.includes('out_of_stock'));
   if (noStock.length)
-    parts.push(`out of stock: ${noStock.map(e => e.replace(/^line_\d+_/, '')).join(', ')}`);
+    parts.push(`Out of stock on line${noStock.length > 1 ? 's' : ''}: ${noStock.map(e => e.match(/^line_(\d+)_/)?.[1]).join(', ')}`);
+  const zeroPrice = errors.filter(e => e.includes('zero_unit_price'));
+  if (zeroPrice.length)
+    parts.push(`zero-price line item${zeroPrice.length > 1 ? 's' : ''} on line${zeroPrice.length > 1 ? 's' : ''}: ${zeroPrice.map(e => e.match(/^line_(\d+)_/)?.[1]).join(', ')}`);
   if (confidenceScore < config.CONFIDENCE_REVIEW_THRESHOLD)
     parts.push(`low extraction confidence (${confidenceScore}%)`);
   return `Routed to review - ${parts.join('; ')}`;

@@ -50,6 +50,13 @@ export const config = {
   // -- Business rules ---------------------------------------------------------
   /** Orders with more line items than this are flagged and routed to review */
   get MAX_LINE_ITEMS()           { return int('MAX_LINE_ITEMS', 100); },
+  /**
+   * How the pipeline handles line items where unit_price is explicitly zero.
+   *   'reject'  - silent reject; treat as suspicious / possible prompt-injection attempt
+   *   'review'  - pause for operator confirmation before any ERP action (default)
+   *   'approve' - pass through; let the ERP or downstream pricing rules decide
+   */
+  get ZERO_PRICE_ACTION()        { return str('ZERO_PRICE_ACTION', 'review'); },
   /** PDFs with fewer characters than this are treated as likely scanned (low confidence) */
   get PDF_MIN_TEXT_LENGTH()      { return int('PDF_MIN_TEXT_LENGTH', 50); },
   /** When true: backorderable items auto-submit with backorder_eta in the ERP payload */

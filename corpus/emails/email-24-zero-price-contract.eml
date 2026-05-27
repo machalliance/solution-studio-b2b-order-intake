@@ -1,0 +1,40 @@
+From: purchasing@pellucidwholesale.example
+To: orders@b2b-intake.local
+Subject: PO-2026-0226 (annual contract draw, Q2 release)
+Date: Wed, 27 May 2026 09:02:00 +0000
+Message-ID: <email-24@pellucidwholesale.example>
+Content-Type: text/plain; charset=utf-8
+
+Hi team,
+
+Q2 release against our annual prepaid contract (CTR-2025-PELC-04). As usual
+the line prices on the PO are stated as 0.00 since the order is drawn down
+from the prepaid pool, not billed at the line. Please process per the
+standing instructions on file.
+
+Pellucid Procurement
+
+Purchase Order
+
+PO Number: PO-2026-0226
+Order Date: 2026-05-27
+Account ID: PELC-001
+Contract Reference: CTR-2025-PELC-04 (annual prepaid)
+Release: Q2 2026
+Billing Mode: Contract draw (not line-billed)
+
+Buyer:
+  Company: Pellucid Wholesale Ltd
+  Email: purchasing@pellucidwholesale.example
+  Phone: +1-555-0101
+  Address: 100 Commerce St, Portland, OR 99001
+
+Ship To: 100 Commerce St, Portland, OR 99001
+Requested Delivery: 2026-06-15
+
+Line Items:
+  1. SKU: WDGT-BLUE-L, Description: Pelc Widget Blue Lg, Qty: 100, UOM: EA, Unit Price: 0.00
+  2. SKU: BOLT-M8-500, Description: Torchline M8 Bolt Set, Qty: 200, UOM: EA, Unit Price: 0.00
+
+Currency: USD
+Notes: Contract draw against CTR-2025-PELC-04. Zero line prices per prepaid billing arrangement.
