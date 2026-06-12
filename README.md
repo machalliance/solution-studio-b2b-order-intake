@@ -35,20 +35,20 @@ Built on composable, independently-deployable services where every integration p
 ┌─────────────────────────────────────────────────────────────────┐
 │                    LangGraph Pipeline                           │
 │                                                                 │
-│   Intake ──-> Extraction ──-> Validation ──-> Routing             │
+│   Intake ──-> Extraction ──-> Validation ──-> Routing           │
 │               (Claude AI)   (SKU / Customer                     │
 │                              / Inventory)     │                 │
 │                                               ├──-> Submit ──-> ERP Adapter
 │                                               ├──-> Clarify ──-> Notification Adapter
 │                                               ├──-> Reject ──-> EDI Outbound Adapter
-│                                               └──-> Review ◄──────────────────────┐
+│                                               └──-> Review ◄─────────────────────┐
 │                                                     │  (interrupt + checkpoint)  │
 └─────────────────────────────────────────────────────┼──────────────────────────  │
                                                       v                            │
 ┌─────────────────────────────────────────────────────────────────┐                │
 │                  Agent Control Interface (React)                │                │
 │  Live Feed │ Human Review │ Submitted Orders │ Audit Log        │ ───────────────┘
-│                    operator approves / rejects / clarifies       │
+│                    operator approves / rejects / clarifies      │
 └─────────────────────────────────────────────────────────────────┘
                               │
                    REST API (Express) - /api/v1/*
