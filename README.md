@@ -32,18 +32,18 @@ Built on composable, independently-deployable services where every integration p
 └────────────┼──────────────────────────────────┼─────────────────┘
              │                                  │
              v                                  v
-┌─────────────────────────────────────────────────────────────────┐
-│                    LangGraph Pipeline                           │
-│                                                                 │
-│   Intake ──-> Extraction ──-> Validation ──-> Routing           │
-│               (Claude AI)   (SKU / Customer                     │
-│                              / Inventory)     │                 │
-│                                               ├──-> Submit ──-> ERP Adapter
-│                                               ├──-> Clarify ──-> Notification Adapter
-│                                               ├──-> Reject ──-> EDI Outbound Adapter
-│                                               └──-> Review ◄─────────────────────┐
-│                                                     │  (interrupt + checkpoint)  │
-└─────────────────────────────────────────────────────┼──────────────────────────  │
+┌─────────────────────────────────────────────────────────────────────────────────────────┐
+│                    LangGraph Pipeline                                                   │
+│                                                                                         │
+│   Intake ──-> Extraction ──-> Validation ──-> Routing                                   │
+│               (Claude AI)   (SKU / Customer                                             │
+│                              / Inventory)     │                                         │
+│                                               ├──-> Submit ──-> ERP Adapter             │
+│                                               ├──-> Clarify ──-> Notification Adapter   │
+│                                               ├──-> Reject ──-> EDI Outbound Adapter    │
+│                                               └──-> Review ◄─────────────────────┐      │
+│                                                     │  (interrupt + checkpoint)  │      │
+└─────────────────────────────────────────────────────┼──────────────────────────  │ ─────┘
                                                       v                            │
 ┌─────────────────────────────────────────────────────────────────┐                │
 │                  Agent Control Interface (React)                │                │
